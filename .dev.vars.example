@@ -1,0 +1,8 @@
+STRIPE_SECRET_KEY=sk_test_replace_me
+STRIPE_WEBHOOK_SECRET=whsec_replace_me
+RESEND_API_KEY=
+EMAIL_FROM=Tax Deed Pack <delivered@resend.dev>
+OPS_TOKEN=change-me-ops-token
+SITE_URL=http://127.0.0.1:4173
+ALLOW_DEV_SIMULATE=1
+OPS_NOTIFY_EMAIL=joshuaofisrael@gmail.com

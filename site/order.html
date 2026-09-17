@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order the Tax Deed Research Pack | Joshua Israel Ventures LLC</title>
+  <meta name="description" content="Order a $149 Tax Deed Due Diligence Research Pack. Submit address or APN, acknowledge the required limitations, and pay with Stripe.">
+  <link rel="canonical" href="https://taxdeedpack.com/order.html">
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo.svg" width="42" height="42" alt="">
+        <div>
+          <strong>Joshua Israel Ventures LLC</strong>
+          <span>Tax Deed Research Pack</span>
+        </div>
+      </a>
+      <button class="menu-toggle" type="button" data-menu-toggle>Menu</button>
+      <nav class="nav" data-nav>
+        <a href="index.html#what-you-get">What you get</a>
+        <a href="disclaimer.html">Disclaimer</a>
+        <a class="btn btn-gold" href="order.html">Order for $149</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="form-page">
+    <div class="wrap form-layout">
+      <div>
+        <p class="kicker">Order form</p>
+        <h1>Request a research pack</h1>
+        <p>$149 USD per property. Stripe Checkout opens after this form is complete, including the required disclaimer acknowledgment.</p>
+        <form id="order-form" class="card">
+          <h2>Property</h2>
+          <label for="propertyAddress">Property address</label>
+          <input id="propertyAddress" name="propertyAddress" autocomplete="street-address" placeholder="123 Main St, Example City">
+          <label for="apn">APN / parcel ID</label>
+          <input id="apn" name="apn" placeholder="Use if the situs address is incomplete">
+          <label for="county">County</label>
+          <input id="county" name="county" required>
+          <label for="state">State</label>
+          <select id="state" name="state" required>
+            <option value="">Select a US state</option>
+          </select>
+          <p class="notice" id="jurisdiction-notice">Select a US state to load the jurisdiction safety gate.</p>
+
+          <h2>Research sections you can request</h2>
+          <p class="muted">Only public-record research items offered in the selected state can be checked. Licensed-service items stay disabled.</p>
+          <div id="offered-sections" class="checklist"></div>
+          <h3>Not offered in this jurisdiction</h3>
+          <div id="disabled-sections" class="checklist"></div>
+
+          <h2>Buyer</h2>
+          <label for="buyerName">Buyer name</label>
+          <input id="buyerName" name="buyerName" required autocomplete="name">
+          <label for="buyerEmail">Buyer email</label>
+          <input id="buyerEmail" name="buyerEmail" type="email" required autocomplete="email">
+          <label for="referralCode">Referral code (optional)</label>
+          <input id="referralCode" name="referralCode" maxlength="32" placeholder="Example: BRENDA">
+
+          <h2>Required acknowledgment</h2>
+          <div id="disclaimer-text" class="disclaimer-box"></div>
+          <label class="ack">
+            <input id="disclaimerAccepted" name="disclaimerAccepted" type="checkbox" required>
+            <span>I have read the Important Limitations text above and I understand this is a research compilation only.</span>
+          </label>
+          <p id="form-error" class="error" role="alert"></p>
+          <button class="btn btn-navy" id="pay-button" type="submit">Pay $149 with Stripe</button>
+        </form>
+      </div>
+      <aside>
+        <div class="card">
+          <h2>Before you pay</h2>
+          <ul>
+            <li>PDF emailed to the buyer</li>
+            <li>Turnaround within about 4 business hours after payment and the address or APN</li>
+            <li>Raw comps are transaction data only</li>
+            <li>No recommended bid and no maximum bid</li>
+          </ul>
+          <p class="muted">Questions: <a href="mailto:joshuaofisrael@gmail.com">joshuaofisrael@gmail.com</a></p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <a href="terms.html">Terms</a> ·
+      <a href="privacy.html">Privacy</a> ·
+      <a href="disclaimer.html">Disclaimer</a> ·
+      <a href="mailto:joshuaofisrael@gmail.com">joshuaofisrael@gmail.com</a>
+    </div>
+  </footer>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/config.local.js"></script>
+  <script src="assets/js/compliance-copy.js"></script>
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/order.js"></script>
+</body>
+</html>

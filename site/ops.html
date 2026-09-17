@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Operations | Joshua Israel Ventures LLC</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo.svg" width="42" height="42" alt="">
+        <div>
+          <strong>Joshua Israel Ventures LLC</strong>
+          <span>Operations</span>
+        </div>
+      </a>
+    </div>
+  </header>
+  <main class="form-page">
+    <div class="wrap">
+      <h1>Order and referral desk</h1>
+      <p class="muted">Authenticated ops view. Use the OPS_TOKEN from the worker environment. Not linked from the public nav.</p>
+      <div class="card">
+        <label for="ops-token">Ops token</label>
+        <input id="ops-token" type="password" autocomplete="off">
+        <p><button class="btn btn-navy" id="ops-load" type="button">Load orders</button></p>
+        <p id="ops-error" class="error"></p>
+      </div>
+      <h2>Referral stats (Brenda)</h2>
+      <div id="ops-referrals" class="card"></div>
+      <h2>Orders</h2>
+      <div id="ops-orders" class="card"></div>
+    </div>
+  </main>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/config.local.js"></script>
+  <script src="assets/js/ops.js"></script>
+</body>
+</html>

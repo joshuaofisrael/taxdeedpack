@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment received | Joshua Israel Ventures LLC</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo.svg" width="42" height="42" alt="">
+        <div>
+          <strong>Joshua Israel Ventures LLC</strong>
+          <span>Tax Deed Research Pack</span>
+        </div>
+      </a>
+    </div>
+  </header>
+  <main class="success-panel">
+    <div class="wrap">
+      <div class="card">
+        <p class="kicker">Stripe payment received</p>
+        <h1>Your research pack is being prepared</h1>
+        <p>The Tax Deed Due Diligence Research Pack PDF is generated after payment and emailed to the buyer address on the order. Typical turnaround is within about 4 business hours after payment and the property address or APN are received.</p>
+        <p id="status-line" class="notice">Confirming order status...</p>
+        <p>Read the Important Limitations pages in the PDF before you use the research. This delivery is a research compilation only.</p>
+        <p>Questions: <a href="mailto:joshuaofisrael@gmail.com">joshuaofisrael@gmail.com</a></p>
+        <p><a class="btn btn-navy" href="index.html">Return home</a></p>
+      </div>
+    </div>
+  </main>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/config.local.js"></script>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var sessionId = params.get("session_id");
+      var line = document.getElementById("status-line");
+      if (!sessionId) {
+        line.textContent = "Payment was recorded by Stripe. Watch your email for the PDF.";
+        return;
+      }
+      var apiBase = (window.TAXDEEDPACK && window.TAXDEEDPACK.apiBase) || "";
+      fetch(apiBase + "/api/order-status?session_id=" + encodeURIComponent(sessionId))
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data.status === "fulfilled") {
+            line.textContent = "Order " + data.orderId + " is fulfilled. Check the buyer email for the PDF.";
+          } else if (data.orderId) {
+            line.textContent = "Order " + data.orderId + " status: " + data.status + ". The PDF is emailed when fulfillment finishes.";
+          } else {
+            line.textContent = "Payment was received. Fulfillment will email the PDF to the buyer.";
+          }
+        })
+        .catch(function () {
+          line.textContent = "Payment was received. Watch the buyer email for the PDF.";
+        });
+    })();
+  </script>
+</body>
+</html>

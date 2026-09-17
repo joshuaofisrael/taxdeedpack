@@ -1,0 +1,21 @@
+name = "taxdeedpack-api"
+main = "worker/src/index.ts"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+SITE_URL = "https://taxdeedpack.com"
+EMAIL_FROM = "Tax Deed Pack <orders@taxdeedpack.com>"
+OPS_NOTIFY_EMAIL = "joshuaofisrael@gmail.com"
+ALLOW_DEV_SIMULATE = "0"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "taxdeedpack"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+# Secrets (set with wrangler secret put):
+# STRIPE_SECRET_KEY
+# STRIPE_WEBHOOK_SECRET
+# RESEND_API_KEY
+# OPS_TOKEN
