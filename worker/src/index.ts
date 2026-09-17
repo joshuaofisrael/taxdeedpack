@@ -14,7 +14,7 @@ import {
 } from "../../shared/compliance.js";
 import { matrixPublicView } from "../../shared/jurisdiction.js";
 import { createOrderId } from "../../shared/order-id.js";
-import { PREFERRED_PARTNERS, SEEDED_REFERRAL_CODES } from "../../shared/partners.js";
+import { PREFERRED_PARTNERS, SEEDED_REFERRAL_CODES, isFreeTestCode, ADMINJ_DELIVER_ONLY_TO, FREE_TEST_CODE } from "../../shared/partners.js";
 import { US_STATES } from "../../shared/us-states.js";
 import {
   attachStripeSession,
@@ -91,15 +91,40 @@ app.get("/api/jurisdiction/:state", (c) => {
 app.post("/api/checkout", async (c) => {
   const parsed = parseCheckoutBody(await c.req.json().catch(() => null));
   if (!parsed.ok) return c.json({ error: parsed.error }, 400);
+
+  const orderId = createOrderId();
+  const checkout = { ...parsed.value };
+
+  // ADMINJ: free internal test. Pack email goes only to Joshua's personal inbox.
+  if (isFreeTestCode(checkout.referralCode)) {
+    checkout.buyerEmail = ADMINJ_DELIVER_ONLY_TO;
+    checkout.referralCode = FREE_TEST_CODE;
+    await insertPendingOrder(c.env.DB, orderId, checkout, 0);
+    await markPaid(c.env.DB, orderId, "adminj_comp");
+    try {
+      const result = await fulfillPaidOrder(c.env, orderId);
+      const site = c.env.SITE_URL || SITE_URL;
+      return c.json({
+        orderId,
+        free: true,
+        deliveredOnlyTo: ADMINJ_DELIVER_ONLY_TO,
+        emailed: result.emailed,
+        url: `${site.replace(/\/$/, "")}/success.html?order_id=${encodeURIComponent(orderId)}&free=1`,
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Free test fulfillment failed.";
+      return c.json({ error: message, orderId, free: true }, 502);
+    }
+  }
+
   if (!c.env.STRIPE_SECRET_KEY) {
     return c.json({ error: "Stripe is not configured on the API." }, 503);
   }
 
-  const orderId = createOrderId();
-  await insertPendingOrder(c.env.DB, orderId, parsed.value, PRODUCT_PRICE_CENTS);
+  await insertPendingOrder(c.env.DB, orderId, checkout, PRODUCT_PRICE_CENTS);
   const label = [
-    parsed.value.propertyAddress,
-    parsed.value.apn ? `APN ${parsed.value.apn}` : "",
+    checkout.propertyAddress,
+    checkout.apn ? `APN ${checkout.apn}` : "",
   ]
     .filter(Boolean)
     .join(" / ");
@@ -109,7 +134,7 @@ app.post("/api/checkout", async (c) => {
       secretKey: c.env.STRIPE_SECRET_KEY,
       siteUrl: c.env.SITE_URL || SITE_URL,
       orderId,
-      buyerEmail: parsed.value.buyerEmail,
+      buyerEmail: checkout.buyerEmail,
       propertyLabel: label || "subject property",
     });
     await attachStripeSession(c.env.DB, orderId, session.id);
