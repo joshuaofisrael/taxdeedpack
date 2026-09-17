@@ -1,0 +1,17 @@
+name = "taxdeedpack-api"
+main = "../api/worker.js"
+compatibility_date = "2025-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+SITE_URL = "https://taxdeedpack.com"
+ALLOW_ORIGIN = "https://taxdeedpack.com"
+ALLOW_TEST_CHECKOUT = "0"
+MAIL_FROM = "Joshua Israel Ventures LLC <reports@taxdeedpack.com>"
+OPS_EMAIL = "joshuaofisrael@gmail.com"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "taxdeedpack"
+database_id = "REPLACE_AFTER_D1_CREATE"
+migrations_dir = "migrations"

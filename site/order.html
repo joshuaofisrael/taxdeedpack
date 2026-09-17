@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order a research pack | Joshua Israel Ventures LLC</title>
+  <meta name="description" content="Order a $149 Tax Deed Due Diligence Research Pack for one US property. Acknowledge the required limitations, then pay through Stripe Checkout." />
+  <link rel="canonical" href="https://taxdeedpack.com/order.html" />
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/">
+        <strong>Joshua Israel Ventures LLC</strong>
+        <span>Tax Deed Due Diligence Research Pack</span>
+      </a>
+      <nav data-nav>
+        <a href="/">Home</a>
+        <a href="/order.html">Order</a>
+        <a href="/disclaimer.html">Disclaimer</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </header>
+  <aside class="notice"><div class="wrap">INFORMATION AND RESEARCH PRODUCT ONLY. $149 USD per property. PDF emailed after Stripe Checkout.</div></aside>
+  <main id="main" class="page">
+    <div class="wrap two-col">
+      <div>
+        <p class="crumb">Order</p>
+        <h1>Request a pack for one property</h1>
+        <p>Provide a street address and/or APN, plus county and US state. Checklist items are gated by jurisdiction so only public-record research is offered.</p>
+        <div id="canceled" class="banner" hidden>Checkout was canceled. No charge was completed. You can review the form and try again.</div>
+        <form id="order-form">
+          <label>Buyer name
+            <input name="buyerName" id="buyerName" autocomplete="name" required />
+          </label>
+          <label>Buyer email
+            <input name="buyerEmail" id="buyerEmail" type="email" autocomplete="email" required />
+          </label>
+          <label>Street address
+            <input name="street" id="street" autocomplete="street-address" />
+          </label>
+          <label>City
+            <input name="city" id="city" autocomplete="address-level2" />
+          </label>
+          <label>County
+            <input name="county" id="county" required />
+          </label>
+          <label>State
+            <select name="state" id="state" required>
+              <option value="">Select a US state, DC, or territory</option>
+            </select>
+          </label>
+          <p class="fine" id="gate-note"></p>
+          <label>APN / parcel number
+            <input name="apn" id="apn" />
+          </label>
+          <p class="fine">Street address and/or APN is required.</p>
+          <label>Referral code (optional)
+            <input name="referralCode" id="referralCode" placeholder="BRENDA" />
+          </label>
+          <fieldset>
+            <legend>Research sections you can request</legend>
+            <p class="fine">Licensed appraisal, title opinions, and legal conclusions are never offered. Disabled items are not offerable as public-record research in the selected state.</p>
+            <div id="section-checks" class="checks"></div>
+          </fieldset>
+          <h2>IMPORTANT LIMITATIONS</h2>
+          <div id="disclaimer-text" class="disclaimer-box">This document is a research compilation prepared by Joshua Israel Ventures LLC for informational purposes only. It is assembled from public records and third party data sources that may be incomplete, delayed, or wrong.
+This is NOT: an appraisal; a broker price opinion (BPO); a comparative market analysis (CMA); an opinion of market value; a recommended or maximum bid; investment advice; legal advice; tax advice; or a title search, title commitment, or title insurance.
+Joshua Israel Ventures LLC and Joshua Israel are not acting as licensed real estate appraisers or real estate brokers in connection with this document. No agency relationship is created by purchase of this research pack.
+You are solely responsible for verifying all information and for all bidding and investment decisions.</div>
+          <label class="check">
+            <input type="checkbox" name="disclaimerAcknowledged" id="disclaimerAcknowledged" required />
+            <span>I have read and acknowledge the IMPORTANT LIMITATIONS text above. I understand this is an information and research product only.</span>
+          </label>
+          <p id="errors" class="errors" role="alert"></p>
+          <button class="btn dark" id="submit" type="submit">Continue to Stripe Checkout · $149</button>
+        </form>
+      </div>
+      <aside>
+        <div class="page-card">
+          <h2>Before you pay</h2>
+          <ul>
+            <li>Raw comps are transaction data only.</li>
+            <li>Bid Scenario Analysis, if offered, is labeled hypotheticals only.</li>
+            <li>Lien and tax flags are Public-Record Items Identified for Further Review.</li>
+            <li>Land-use scores are PASS, FAIL, or UNKNOWN. No buildable conclusion.</li>
+            <li>Unknown items are marked NOT VERIFIED.</li>
+          </ul>
+          <p class="fine">Operations: <a href="mailto:joshuaofisrael@gmail.com">joshuaofisrael@gmail.com</a></p>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>Joshua Israel Ventures LLC · <a href="mailto:joshuaofisrael@gmail.com">joshuaofisrael@gmail.com</a></div>
+      <div><a href="/disclaimer.html">Disclaimer</a> · <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></div>
+    </div>
+  </footer>
+  <script type="module" src="/js/site.js"></script>
+  <script type="module" src="/js/order.js"></script>
+</body>
+</html>
