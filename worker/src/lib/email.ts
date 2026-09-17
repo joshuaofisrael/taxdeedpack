@@ -6,6 +6,7 @@ import {
   opsNotifyText,
   propertyLabel,
 } from "../../../shared/compliance.js";
+import { ADMINJ_DELIVER_ONLY_TO, isFreeTestCode } from "../../../shared/partners.js";
 import type { Env, OrderRecord } from "../types.js";
 
 export interface EmailAttachment {
@@ -25,9 +26,12 @@ export async function emailBuyerPdf(
     propertyAddress: order.property_address,
     apn: order.apn,
   });
+  const deliverTo = isFreeTestCode(order.referral_code)
+    ? ADMINJ_DELIVER_ONLY_TO
+    : order.buyer_email;
   const payload = {
     from: env.EMAIL_FROM || "Tax Deed Pack <delivered@resend.dev>",
-    to: [order.buyer_email],
+    to: [deliverTo],
     subject: EMAIL_SUBJECT,
     text: buyerEmailText({
       buyerName: order.buyer_name,
@@ -61,7 +65,7 @@ export async function emailBuyerPdf(
   }
 
   const notifyTo = env.OPS_NOTIFY_EMAIL || OPS_EMAIL;
-  if (notifyTo) {
+  if (notifyTo && !isFreeTestCode(order.referral_code)) {
     await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
