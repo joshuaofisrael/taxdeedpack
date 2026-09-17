@@ -249,3 +249,39 @@ th, td { border-bottom: 1px solid var(--rule); text-align: left; padding: 10px 8
   .nav.open { display: flex; }
   .hero { padding: 56px 0; }
 }
+
+/* About Us */
+.about-hero { padding: 48px 0 12px; }
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: 36px;
+  align-items: start;
+  margin: 28px 0 48px;
+}
+.about-photo {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow);
+  background: #fff;
+  object-fit: cover;
+  aspect-ratio: 3 / 4;
+}
+.about-bio h2 { font-family: var(--serif); color: var(--navy); margin-top: 0; }
+.about-bio .role {
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 0 0 16px;
+}
+.about-callout {
+  background: var(--paper);
+  border-left: 4px solid var(--gold);
+  padding: 18px 20px;
+  margin: 24px 0;
+}
+@media (max-width: 800px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-photo { max-width: 360px; }
+}
