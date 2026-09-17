@@ -1,0 +1,17 @@
+node_modules/
+.wrangler/
+.dev.vars
+.env
+.env.local
+dist/
+coverage/
+*.log
+.DS_Store
+tmp/
+tmp-dev.sqlite
+*.sqlite
+.vite/
+worker/.wrangler/
+api/.wrangler/
+artifacts/*.pdf
+!artifacts/.gitkeep
