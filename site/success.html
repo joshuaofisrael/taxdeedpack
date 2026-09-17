@@ -45,9 +45,14 @@
       var free = params.get("free") === "1";
       var line = document.getElementById("status-line");
       if (free && orderId) {
-        line.textContent = "Free ADMINJ test order " + orderId + " was submitted. The pack is emailed only to joshuaofisrael@gmail.com.";
         var kicker = document.querySelector(".kicker");
         if (kicker) kicker.textContent = "Free internal test";
+        var issue = params.get("issue");
+        if (params.get("github") === "1" && issue) {
+          line.innerHTML = "Free ADMINJ test order <strong>" + orderId + "</strong> is ready. Open the GitHub issue to finish fulfillment. The pack emails only to joshuaofisrael@gmail.com.<br><br><a class=\"btn btn-gold\" href=\"" + decodeURIComponent(issue) + "\" target=\"_blank\" rel=\"noopener\">Create GitHub fulfillment issue</a>";
+          return;
+        }
+        line.textContent = "Free ADMINJ test order " + orderId + " was submitted. The pack is emailed only to joshuaofisrael@gmail.com.";
         return;
       }
       if (!sessionId) {
