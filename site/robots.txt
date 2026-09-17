@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /ops.html
+Sitemap: https://taxdeedpack.com/sitemap.xml
