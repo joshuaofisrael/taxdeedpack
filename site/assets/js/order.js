@@ -111,6 +111,33 @@
     };
 
     try {
+      const referral = (payload.referralCode || "").trim().toUpperCase();
+      if (referral === "ADMINJ") {
+        const orderId = "JIV" + new Date().toISOString().slice(0,10).replace(/-/g, "") + Math.random().toString(36).slice(2,8).toUpperCase();
+        const githubPayload = Object.assign({}, payload, {
+          orderId: orderId,
+          referralCode: "ADMINJ",
+          disclaimerAcceptedAt: new Date().toISOString(),
+        });
+        const issueBody = [
+          "ADMINJ free internal test order for Joshua Israel Ventures LLC.",
+          "",
+          "Delivery: PDF emailed only to joshuaofisrael@gmail.com after this issue is created.",
+          "",
+          "```json",
+          JSON.stringify(githubPayload, null, 2),
+          "```",
+        ].join("\n");
+        const title = "ADMINJ-ORDER " + orderId;
+        const url =
+          "https://github.com/joshuaofisrael/taxdeedpack/issues/new" +
+          "?title=" + encodeURIComponent(title) +
+          "&labels=" + encodeURIComponent("adminj-order") +
+          "&body=" + encodeURIComponent(issueBody);
+        window.location.href = "success.html?free=1&order_id=" + encodeURIComponent(orderId) + "&github=1&issue=" + encodeURIComponent(url);
+        return;
+      }
+
       const response = await fetch(apiBase + "/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -119,10 +146,6 @@
       const data = await response.json();
       if (!response.ok || !data.url) {
         throw new Error(data.error || "Checkout could not start.");
-      }
-      if (data.free) {
-        window.location.href = data.url;
-        return;
       }
       window.location.href = data.url;
     } catch (error) {
