@@ -2,7 +2,7 @@
   "name": "taxdeedpack",
   "version": "1.0.0",
   "private": true,
-  "description": "Joshua Israel Ventures LLC — Tax Deed Due Diligence Research Pack storefront and fulfillment API",
+  "description": "Joshua Israel Ventures LLC \u2014 Tax Deed Due Diligence Research Pack storefront and fulfillment API",
   "type": "module",
   "scripts": {
     "test": "vitest run",
@@ -14,7 +14,8 @@
     "sample:pdf": "tsx scripts/generate-sample-pdf.ts",
     "simulate:fulfill": "tsx scripts/simulate-fulfillment.ts",
     "compliance:scan": "tsx scripts/compliance-scan.ts",
-    "deploy:worker": "wrangler deploy"
+    "deploy:worker": "wrangler deploy",
+    "fulfill:github": "tsx scripts/fulfill-github-order.ts"
   },
   "engines": {
     "node": ">=20"
