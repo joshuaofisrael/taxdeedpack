@@ -12,3 +12,10 @@ If the source does not establish it, output NOT VERIFIED.
 6. Zoning / flood / use: PASS / FAIL / UNKNOWN only when the cited public source supports that checkbox outcome; otherwise NOT VERIFIED / UNKNOWN.
 7. Bid Scenario Analysis: labeled hypotheticals only; arithmetic from stated inputs; never presented as verified market facts.
 8. Store source URLs / ids alongside each fact in the order JSON so audits can re-check the PDF.
+
+## Footnotes (required presentation)
+
+Every material fact in the body of the PDF must show a superscript footnote marker (1, 2, 3, …).
+A Footnotes / Sources section at the bottom of the PDF (end of report, and optionally per page footer if the generator supports it) lists each number with the actual source: title/agency, retrieval date, and URL or record identifier.
+NOT VERIFIED facts either have no footnote, or a footnote that states no establishing source was retrieved.
+Do not put bare URLs only in the body without the numbered footnote system.
