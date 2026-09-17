@@ -90,7 +90,8 @@
     event.preventDefault();
     errorEl.textContent = "";
     submitBtn.disabled = true;
-    submitBtn.textContent = "Opening Stripe Checkout...";
+    const code = form.referralCode.value.trim().toUpperCase();
+    submitBtn.textContent = code === "ADMINJ" ? "Submitting free test..." : "Opening Stripe Checkout...";
 
     const sections = Array.from(form.querySelectorAll('input[name="sections"]:checked:not(:disabled)')).map(
       function (input) { return input.value; },
@@ -118,6 +119,10 @@
       const data = await response.json();
       if (!response.ok || !data.url) {
         throw new Error(data.error || "Checkout could not start.");
+      }
+      if (data.free) {
+        window.location.href = data.url;
+        return;
       }
       window.location.href = data.url;
     } catch (error) {
