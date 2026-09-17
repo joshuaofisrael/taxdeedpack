@@ -41,7 +41,15 @@
     (function () {
       var params = new URLSearchParams(window.location.search);
       var sessionId = params.get("session_id");
+      var orderId = params.get("order_id");
+      var free = params.get("free") === "1";
       var line = document.getElementById("status-line");
+      if (free && orderId) {
+        line.textContent = "Free ADMINJ test order " + orderId + " was submitted. The pack is emailed only to joshuaofisrael@gmail.com.";
+        var kicker = document.querySelector(".kicker");
+        if (kicker) kicker.textContent = "Free internal test";
+        return;
+      }
       if (!sessionId) {
         line.textContent = "Payment was recorded by Stripe. Watch your email for the PDF.";
         return;
