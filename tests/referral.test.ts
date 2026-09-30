@@ -23,6 +23,6 @@ describe("referral tracking", () => {
     expect(isFreeTestCode("adminj")).toBe(true);
     expect(isFreeTestCode("BRENDA")).toBe(false);
     expect(ADMINJ_DELIVER_ONLY_TO).toBe("joshuaofisrael@gmail.com");
-    expect(SEEDED_REFERRAL_CODES.some((row) => row.code === "ADMINJ")).toBe(false);
+    expect(SEEDED_REFERRAL_CODES.some((row) => (row.code as string) === FREE_TEST_CODE)).toBe(false);
   });
 });
