@@ -1,0 +1,18 @@
+# Tax Deed Due Diligence Research Pack
+
+> A $149 per property, research only PDF of cited public record information for one US property, built for tax deed investors and delivered by email, usually within about 4 business hours after payment and the property address or APN are received. It is not an appraisal, title search, legal advice, or bid recommendation, and any fact without an establishing source is marked NOT VERIFIED. Operated by Joshua Israel Ventures LLC.
+
+## Product
+
+- [Home and overview](https://taxdeedpack.com/): What the Research Pack includes, what it does not include, how ordering works, and investor FAQs.
+- [Order a Research Pack](https://taxdeedpack.com/order.html): Submit an address or APN, county and state, accept the required agreement, and pay $149 through Stripe.
+
+## Company
+
+- [About Us](https://taxdeedpack.com/about.html): Joshua Israel Ventures LLC and founder Joshua Israel, and how the software and AI assisted public record research works.
+
+## Legal
+
+- [Disclaimer](https://taxdeedpack.com/disclaimer.html): Important limitations of the Research Pack.
+- [Terms of Use](https://taxdeedpack.com/terms.html): Terms, pricing, delivery, and refund policy.
+- [Privacy Policy](https://taxdeedpack.com/privacy.html): How order and contact data is handled.

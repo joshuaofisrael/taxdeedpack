@@ -1,4 +1,62 @@
 User-agent: *
 Allow: /
 Disallow: /ops.html
+
+# AI search and assistant crawlers are explicitly welcome
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /ops.html
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /ops.html
+
+User-agent: GPTBot
+Allow: /
+Disallow: /ops.html
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /ops.html
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /ops.html
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /ops.html
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /ops.html
+
+User-agent: Claude-User
+Allow: /
+Disallow: /ops.html
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /ops.html
+
+User-agent: Applebot
+Allow: /
+Disallow: /ops.html
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /ops.html
+
+User-agent: Bingbot
+Allow: /
+Disallow: /ops.html
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /ops.html
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /ops.html
+
 Sitemap: https://taxdeedpack.com/sitemap.xml
