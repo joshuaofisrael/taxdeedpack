@@ -59,4 +59,24 @@ User-agent: Amazonbot
 Allow: /
 Disallow: /ops.html
 
+User-agent: anthropic-ai
+Allow: /
+Disallow: /ops.html
+
+User-agent: CCBot
+Allow: /
+Disallow: /ops.html
+
+User-agent: Bytespider
+Allow: /
+Disallow: /ops.html
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /ops.html
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /ops.html
+
 Sitemap: https://taxdeedpack.com/sitemap.xml
