@@ -19,6 +19,7 @@
 ## Company
 
 - [About Us](https://taxdeedpack.com/about.html): Joshua Israel Ventures LLC and founder Joshua Israel, and how the software and AI assisted public record research works.
+- [Contact Us](https://taxdeedpack.com/contact/): Contact form for questions about the Research Pack, an existing order, or county coverage. Messages are delivered by email.
 
 ## Legal
 
