@@ -1,5 +1,56 @@
 (function () {
-  const apiBase = (window.TAXDEEDPACK && window.TAXDEEDPACK.apiBase) || "";
+  const cfg = window.TAXDEEDPACK || {};
+  const paymentLink = cfg.paymentLink || "";
+  const intakeEndpoint = cfg.intakeEndpoint || "";
+  const INTERNAL_CODE_SHA256 = "d623bcdd29ef476a9bb079f617a4ac1a580e0ace2009e324f982ae9d43969f84";
+
+  async function sha256Hex(text) {
+    if (!window.crypto || !window.crypto.subtle || !window.TextEncoder) return "";
+    const buf = await window.crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+  }
+
+  function makeOrderId() {
+    return "TDP" + new Date().toISOString().slice(0, 10).replace(/-/g, "") +
+      Math.random().toString(36).slice(2, 8).toUpperCase();
+  }
+
+  async function sendIntake(payload, orderId) {
+    if (!intakeEndpoint) return;
+    const body = {
+      _subject: "Tax Deed Pack order intake " + orderId + " (awaiting Stripe payment)",
+      _template: "table",
+      _captcha: "false",
+      _honey: "",
+      order_id: orderId,
+      buyer_name: payload.buyerName,
+      buyer_email: payload.buyerEmail,
+      property_address: payload.propertyAddress,
+      apn: payload.apn,
+      county: payload.county,
+      state: payload.state,
+      sections: payload.sections.join(", "),
+      referral_code: payload.referralCode,
+      limitations_acknowledged: payload.disclaimerAccepted ? "yes" : "no",
+      agreement_accepted: payload.agreementAccepted ? "yes (Property Research Services Agreement, Florida law)" : "no",
+      accepted_at: new Date().toISOString(),
+      page: window.location.href,
+    };
+    const ctrl = window.AbortController ? new AbortController() : null;
+    const timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 4000);
+    try {
+      await fetch(intakeEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(body),
+        signal: ctrl ? ctrl.signal : undefined,
+      });
+    } catch (err) {
+      // Intake copy is best effort; Stripe custom fields also capture the property and county.
+    } finally {
+      clearTimeout(timer);
+    }
+  }
   const form = document.getElementById("order-form");
   if (!form) return;
 
@@ -38,8 +89,9 @@
       disabledBox.appendChild(checkRow(item.id, item.label, false, "Requires a licensed professional. Not offered."));
     });
     notice.textContent = stateName
-      ? "Safer research-only default is shown until the API matrix loads. Licensed-service items stay disabled."
+      ? "Research-only sections are shown. Licensed-service items stay disabled in every state."
       : "Select a US state to load the jurisdiction safety gate.";
+
   }
 
   function checkRow(id, label, offered, reason) {
@@ -58,27 +110,8 @@
     return wrap;
   }
 
-  async function loadMatrix(code) {
-    if (!code) {
-      renderFallback("");
-      return;
-    }
-    try {
-      const response = await fetch(apiBase + "/api/jurisdiction/" + code);
-      if (!response.ok) throw new Error("matrix");
-      const data = await response.json();
-      offeredBox.innerHTML = "";
-      disabledBox.innerHTML = "";
-      data.offered.forEach(function (item) {
-        offeredBox.appendChild(checkRow(item.id, item.title, true, item.reason));
-      });
-      data.disabled.forEach(function (item) {
-        disabledBox.appendChild(checkRow(item.id, item.title, false, item.reason));
-      });
-      notice.textContent = data.extraNotice;
-    } catch (err) {
-      renderFallback(code);
-    }
+  function loadMatrix(code) {
+    renderFallback(code);
   }
 
   stateSelect.addEventListener("change", function () {
@@ -89,9 +122,21 @@
   form.addEventListener("submit", async function (event) {
     event.preventDefault();
     errorEl.textContent = "";
+    if (form.website && form.website.value) return; // honeypot
+
+    if (!form.propertyAddress.value.trim() && !form.apn.value.trim()) {
+      errorEl.textContent = "Enter the property address or the APN / parcel ID.";
+      return;
+    }
+    if (!form.disclaimerAccepted.checked || !form.agreementAccepted.checked) {
+      errorEl.textContent = "Please accept both the Important Limitations and the Property Research Services Agreement.";
+      return;
+    }
+
     submitBtn.disabled = true;
     const code = form.referralCode.value.trim().toUpperCase();
-    submitBtn.textContent = code === "ADMINJ" ? "Submitting free test..." : "Opening Stripe Checkout...";
+    const isInternal = code && (await sha256Hex(code)) === INTERNAL_CODE_SHA256;
+    submitBtn.textContent = isInternal ? "Submitting free test..." : "Opening Stripe Checkout...";
 
     const sections = Array.from(form.querySelectorAll('input[name="sections"]:checked:not(:disabled)')).map(
       function (input) { return input.value; },
@@ -105,22 +150,22 @@
       county: form.county.value.trim(),
       state: form.state.value,
       sections: sections,
-      referralCode: form.referralCode.value.trim(),
+      referralCode: code,
       disclaimerAccepted: form.disclaimerAccepted.checked,
+      agreementAccepted: form.agreementAccepted.checked,
       disclaimerText: window.JIV_DISCLAIMER,
     };
 
     try {
-      const referral = (payload.referralCode || "").trim().toUpperCase();
-      if (referral === "ADMINJ") {
+      if (isInternal) {
         const orderId = "JIV" + new Date().toISOString().slice(0,10).replace(/-/g, "") + Math.random().toString(36).slice(2,8).toUpperCase();
         const githubPayload = Object.assign({}, payload, {
           orderId: orderId,
-          referralCode: "ADMINJ",
+          referralCode: code,
           disclaimerAcceptedAt: new Date().toISOString(),
         });
         const issueBody = [
-          "ADMINJ free internal test order for Joshua Israel Ventures LLC.",
+          code + " free internal test order for Joshua Israel Ventures LLC.",
           "",
           "Delivery: PDF emailed only to joshuaofisrael@gmail.com after this issue is created.",
           "",
@@ -128,26 +173,24 @@
           JSON.stringify(githubPayload, null, 2),
           "```",
         ].join("\n");
-        const title = "ADMINJ-ORDER " + orderId;
+        const title = code + "-ORDER " + orderId;
         const url =
           "https://github.com/joshuaofisrael/taxdeedpack/issues/new" +
           "?title=" + encodeURIComponent(title) +
-          "&labels=" + encodeURIComponent("adminj-order") +
+          "&labels=" + encodeURIComponent(code.toLowerCase() + "-order") +
           "&body=" + encodeURIComponent(issueBody);
         window.location.href = "success.html?free=1&order_id=" + encodeURIComponent(orderId) + "&github=1&issue=" + encodeURIComponent(url);
         return;
       }
 
-      const response = await fetch(apiBase + "/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const data = await response.json();
-      if (!response.ok || !data.url) {
-        throw new Error(data.error || "Checkout could not start.");
-      }
-      window.location.href = data.url;
+      if (!paymentLink) throw new Error("Checkout is not available right now.");
+      const orderId = makeOrderId();
+      await sendIntake(payload, orderId);
+      const ref = (orderId + (code ? "_" + code : "")).replace(/[^A-Za-z0-9_-]/g, "").slice(0, 200);
+      const target = paymentLink +
+        "?prefilled_email=" + encodeURIComponent(payload.buyerEmail) +
+        "&client_reference_id=" + encodeURIComponent(ref);
+      window.location.href = target;
     } catch (error) {
       errorEl.textContent = error.message + " If this continues, write to joshuaofisrael@gmail.com.";
       submitBtn.disabled = false;

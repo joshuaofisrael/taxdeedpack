@@ -35,7 +35,7 @@
       <div>
         <p class="kicker">Order form</p>
         <h1>Request a research pack</h1>
-        <p>$149 USD per property. Stripe Checkout opens after this form is complete, including the required disclaimer acknowledgment.</p>
+        <p>$149 USD per property. Secure Stripe Checkout opens after this form is complete, including the required acknowledgments. At checkout, confirm the property and county so they reach us with your payment.</p>
         <form id="order-form" class="card">
           <h2>Property</h2>
           <label for="propertyAddress">Property address</label>
@@ -70,6 +70,11 @@
             <input id="disclaimerAccepted" name="disclaimerAccepted" type="checkbox" required>
             <span>I have read the Important Limitations text above and I understand this is a research compilation only.</span>
           </label>
+          <label class="ack">
+            <input id="agreementAccepted" name="agreementAccepted" type="checkbox" required>
+            <span>I agree to the <a href="terms.html" target="_blank" rel="noopener">Property Research Services Agreement</a>, governed by Florida law. Stripe asks you to confirm this again at checkout.</span>
+          </label>
+          <div style="position:absolute;left:-9999px" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
           <p id="form-error" class="error" role="alert"></p>
           <button class="btn btn-navy" id="pay-button" type="submit">Pay $149 with Stripe</button>
         </form>
@@ -99,11 +104,11 @@
     </div>
     <div class="legal-footer" style="text-align:center;font-size:0.95rem;line-height:1.6;margin:1.25rem auto;max-width:900px;padding:0 16px;"><p style="margin:0 0 6px;">&copy; 2026 Joshua Israel Ventures LLC. All rights reserved. Tax Deed Due Diligence Research Pack (taxdeedpack.com) is owned and operated by Joshua Israel Ventures LLC.</p><p style="margin:0;"><a href="terms.html">Terms</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="disclaimer.html">Disclaimer</a> &middot; <a href="/contact/">Contact</a></p></div>
   </footer>
-  <script src="assets/js/config.js"></script>
+  <script src="assets/js/config.js?v=plink1"></script>
   <script src="assets/js/config.local.js"></script>
   <script src="assets/js/compliance-copy.js"></script>
   <script src="assets/js/site.js"></script>
-  <script src="assets/js/order.js"></script>
+  <script src="assets/js/order.js?v=plink1"></script>
 <!-- GoatCounter analytics -->
 <script data-goatcounter="https://taxdeedpack.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "db9e79b7b3714930a77698b5920f2702"}'></script>
