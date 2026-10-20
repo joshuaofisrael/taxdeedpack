@@ -72,6 +72,24 @@
   });
 
   const params = new URLSearchParams(window.location.search);
+  function clean(v, max) {
+    return String(v || "").replace(/[<>]/g, "").trim().slice(0, max);
+  }
+  if (params.get("county") && !form.county.value) {
+    form.county.value = clean(params.get("county"), 60);
+  }
+  if (params.get("state")) {
+    const code = clean(params.get("state"), 2).toUpperCase();
+    if (window.JIV_STATES.some(function (pair) { return pair[0] === code; })) {
+      stateSelect.value = code;
+    }
+  }
+  if (params.get("apn") && !form.apn.value) {
+    form.apn.value = clean(params.get("apn"), 60);
+  }
+  if (params.get("address") && !form.propertyAddress.value) {
+    form.propertyAddress.value = clean(params.get("address"), 160);
+  }
   if (params.get("ref")) {
     form.referralCode.value = params.get("ref").toUpperCase();
   }
@@ -117,7 +135,7 @@
   stateSelect.addEventListener("change", function () {
     loadMatrix(stateSelect.value);
   });
-  renderFallback("");
+  renderFallback(stateSelect.value || "");
 
   form.addEventListener("submit", async function (event) {
     event.preventDefault();

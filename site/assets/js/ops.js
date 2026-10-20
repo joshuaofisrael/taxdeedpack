@@ -51,13 +51,12 @@
         api("/api/ops/referrals"),
       ]);
 
-      const brenda = (referrals.totals || []).find(function (row) { return row.code === "BRENDA"; });
       refsEl.innerHTML =
-        "<p><strong>Brenda / US Tax Deed Solutions</strong><br>" +
-        "Orders: " + (brenda ? brenda.order_count : 0) +
-        " · Volume: " + money(brenda ? brenda.total_cents : 0) +
-        " · Last: " + (brenda && brenda.last_at ? brenda.last_at : "none") +
-        "</p>" +
+        "<div class='table-wrap'><table><thead><tr><th>Code</th><th>Orders</th><th>Volume</th><th>Last</th></tr></thead><tbody>" +
+        (referrals.totals || []).map(function (row) {
+          return "<tr><td>" + row.code + "</td><td>" + row.order_count + "</td><td>" + money(row.total_cents) + "</td><td>" + (row.last_at || "none") + "</td></tr>";
+        }).join("") +
+        "</tbody></table></div>" +
         "<div class='table-wrap'><table><thead><tr><th>Code</th><th>Order</th><th>Amount</th><th>Time</th></tr></thead><tbody>" +
         (referrals.events || []).map(function (row) {
           return "<tr><td>" + row.code + "</td><td>" + row.order_id + "</td><td>" + money(row.amount_cents) + "</td><td>" + row.created_at + "</td></tr>";
