@@ -286,3 +286,18 @@ th, td { border-bottom: 1px solid var(--rule); text-align: left; padding: 10px 8
   .about-grid { grid-template-columns: 1fr; }
   .about-photo { max-width: 360px; }
 }
+
+/* Photo banners and polish */
+.photo-banner { margin: 32px 0; }
+.photo-banner img { display: block; width: 100%; height: auto; border-radius: 8px; box-shadow: var(--shadow); object-fit: cover; }
+.photo-banner figcaption { margin-top: 10px; font-size: 14px; color: var(--muted); text-align: center; font-style: italic; }
+.photo-strip { padding: 8px 0 24px; }
+.photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.photo-grid .photo-banner { margin: 0; }
+.photo-grid .photo-banner img { aspect-ratio: 4 / 3; }
+@media (max-width: 760px) { .photo-grid { grid-template-columns: 1fr; } .photo-banner { margin: 20px 0; } }
+.card { transition: box-shadow 0.2s ease, transform 0.2s ease; }
+.card:hover { box-shadow: var(--shadow); }
+.btn { transition: filter 0.15s ease, transform 0.15s ease; }
+.btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.hero, .about-hero { border-bottom: 4px solid var(--gold); }
