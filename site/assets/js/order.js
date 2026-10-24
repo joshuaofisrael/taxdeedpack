@@ -210,7 +210,7 @@
         "&client_reference_id=" + encodeURIComponent(ref);
       window.location.href = target;
     } catch (error) {
-      errorEl.textContent = error.message + " If this continues, write to joshuaofisrael@gmail.com.";
+      errorEl.textContent = error.message + " If this continues, please use our contact form at taxdeedpack.com/contact/.";
       submitBtn.disabled = false;
       submitBtn.textContent = "Pay $149 with Stripe";
     }

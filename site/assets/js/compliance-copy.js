@@ -1,7 +1,7 @@
 window.JIV_DISCLAIMER = [
-  "This document is a research compilation prepared by Joshua Israel Ventures LLC for informational purposes only. It is assembled from public records and third party data sources that may be incomplete, delayed, or wrong.",
+  "This document is a research compilation prepared by Tax Deed Pack for informational purposes only. It is assembled from public records and third party data sources that may be incomplete, delayed, or wrong.",
   "This is NOT: an appraisal; a broker price opinion (BPO); a comparative market analysis (CMA); an opinion of market value; a recommended or maximum bid; investment advice; legal advice; tax advice; or a title search, title commitment, or title insurance.",
-  "Joshua Israel Ventures LLC and Joshua Israel are not acting as licensed real estate appraisers or real estate brokers in connection with this document. No agency relationship is created by purchase of this research pack.",
+  "Tax Deed Pack and its operator are not acting as licensed real estate appraisers or real estate brokers in connection with this document. No agency relationship is created by purchase of this research pack.",
   "You are solely responsible for verifying all information and for all bidding and investment decisions.",
 ].join("\n");
 
