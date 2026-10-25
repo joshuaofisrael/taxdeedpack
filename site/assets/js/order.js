@@ -183,7 +183,7 @@
           disclaimerAcceptedAt: new Date().toISOString(),
         });
         const issueBody = [
-          code + " free internal test order for Joshua Israel Ventures LLC.",
+          code + " free internal test order for Tax Deed Pack.",
           "",
           "Delivery: PDF emailed only to joshuaofisrael@gmail.com after this issue is created.",
           "",
