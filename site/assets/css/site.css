@@ -301,3 +301,5 @@ th, td { border-bottom: 1px solid var(--rule); text-align: left; padding: 10px 8
 .btn { transition: filter 0.15s ease, transform 0.15s ease; }
 .btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
 .hero, .about-hero { border-bottom: 4px solid var(--gold); }
+.byline { font-size: 14px; font-style: italic; margin: 4px 0 14px; opacity: 0.9; }
+.fine-dark { font-size: 14px; color: #5a5348; max-width: 70ch; }
