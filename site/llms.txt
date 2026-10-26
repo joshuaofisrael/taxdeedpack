@@ -7,6 +7,10 @@
 - [Home and overview](https://taxdeedpack.com/): What the Research Pack includes, what it does not include, how ordering works, and investor FAQs.
 - [Order a Research Pack](https://taxdeedpack.com/order.html): Submit an address or APN, county and state, accept the required agreement, and pay $149 through Stripe.
 
+## Guides
+
+- [Florida tax deed due diligence checklist](https://taxdeedpack.com/guides/florida-tax-deed-due-diligence-checklist.html): 12 step checklist for researching a Florida tax deed property before the auction, with Florida Statutes ch. 197 citations on liens, redemption, deposits and payment.
+
 ## Upcoming auctions
 
 - [Hillsborough County FL tax deed sale October 15, 2026](https://taxdeedpack.com/auctions/hillsborough-fl-tax-deed-sale-october-15-2026.html): Sourced sale date, online auction URL, Clerk deposit and payment rules, and example certificates from published Notices of Application for Tax Deed.
